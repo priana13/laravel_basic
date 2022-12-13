@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use DB;
 
 /*
 |--------------------------------------------------------------------------
@@ -17,8 +18,20 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+Route::get('/about', function () {
+    return 'Hello World';
+});
+
 
 Route::get('/page', function () {
     return 'this is my page';
+});
+
+
+Route::get('/user/{id}', function ($id) {
+
+    $user = DB::table('users')->where('id',$id)->get();
+
+    return $user;
 });
 
