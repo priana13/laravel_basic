@@ -1,7 +1,6 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use DB;
 
 /*
 |--------------------------------------------------------------------------
@@ -14,6 +13,8 @@ use DB;
 |
 */
 
+
+
 Route::get('/', function () {
     return view('welcome');
 });
@@ -22,16 +23,32 @@ Route::get('/about', function () {
     return 'Hello World';
 });
 
-
-Route::get('/page', function () {
-    return 'this is my page';
+Route::get('/page', function () {    
+    return 'This is Page';
 });
 
+Route::get('/login', function () {    
+    return 'login page';
+})->name('login');
 
-Route::get('/user/{id}', function ($id) {
 
-    $user = DB::table('users')->where('id',$id)->get();
+// Auth Rotes
+Route::prefix('admin')->group(function () {
 
-    return $user;
+    Route::get('/dashboard', function () {
+        return 'This is Dashboard Page';
+    });
+
+    Route::get('/user/{id}', function ($id) {
+
+        return 'This is Page Profile';
+    })->name('my-profile');
+
+    Route::get('/posts', function(){
+
+        return 'this is post page';
+
+    })->name('admin.post');
+
 });
 
